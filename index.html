@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Smashing Magazine Heatmap</title>
+    <style>
+      body {
+        font-family: AvenirNext,Avenir,-apple-system,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Oxygen-Sans,Ubuntu,Cantarell,Georgia,serif;
+      }
+      nav {
+        width: 100%;
+        height: 106px;
+        background-color: grey;
+      }
+      #search {
+        width: 250px;
+        height: 58px;
+        background-color: rgba(0, 0, 0, 0.7);
+        float: right;
+        margin-top: 20px;
+        margin-bottom: auto;
+        margin-right: 50px;
+        color: white;
+        text-align: center;
+        font-size: 30px;
+        font-weight: 500;
+      }
+      .panels {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 840px 840px;
+        grid-gap: 2px;
+        border: solid 2px;
+        color: white;
+      }
+      .panel {
+        background-color: rgba(0, 0, 0, 0.6);
+      }
+      .title {
+        background-color: black;
+        width: 450px;
+        height: 140px;
+        margin-left: 600px;
+        margin-top: 60px;
+        position: absolute;
+        color: white;
+        font-size: 40px;
+        font-weight: 700;
+        text-align: center;
+      }
+      .panelcontent {
+        width: 500px;
+        height: 210px;
+        background-color: rgba(0, 0, 0, 0.6);
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 300px;
+        font-size: 40px;
+        font-weight: 900;
+      }
+      .articles {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 840px 840px 840px;
+        background-color: white;
+        grid-gap: 2px;
+      }
+      .article {
+        background-color: rgba(0, 0, 0, 0.4);
+        font-family:'Times New Roman', Times, serif;
+        font-size: 20px;
+        line-height: 30px;
+      }
+      h2 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+      }
+      .bigarticle {
+        /* grid-area: 2 / 1 / 3 / 3; */
+        background-color: rgba(0, 0, 0, 0.8);
+        grid-column: span 2;
+        color: white;
+        text-align: center;
+        vertical-align: middle;
+        display: table-cell;
+      }
+      .bigarticle h2 {
+        font-size: 50px;
+      }
+      .seearticles {
+        width: 100%;
+        height: 250px;
+        background-color: rgba(0, 0, 0, 0.1);
+        font-family: 'Times New Roman', Times, serif;
+        text-align: center;
+        vertical-align: middle;
+      }
+      .bookad {
+        width: 100%;
+        height: 1200px;
+        background-color: rgba(0, 0, 0, 0.4);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+      }
+      .adtitle {
+        width: 800px;
+        height: 200px;
+        background-color: rgba(0, 0, 0, 0.5);
+        text-align: center;
+        font-size: 60px;
+        color: white;
+        font-weight: 700;
+      }
+      .adbutton {
+        width: 800px;
+        height: 200px;
+        background-color: rgba(0, 0, 0, 0.9);
+        text-align: center;
+        font-size: 35px;
+        color: white;
+        font-weight: 900;
+      }
+      .adpic {
+        width: 800px;
+        height: 500px;
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+      .people {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 300px 300px 300px 300px 300px 200px 400px;
+        background-color: white;
+        grid-gap: 2px;
+      }
+      .mainperson {
+        grid-column: span 2;
+        background-color: rgba(0, 0, 0, 0.3);
+        color: white;
+        font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
+      }
+      .person {
+        background-color: rgba(0, 0, 0, 0.2);
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 25px;
+      }
+      .morepeople {
+        grid-column: span 2;
+        background-color: rgba(0, 0, 0, 0.1);
+        font-family: 'Times New Roman', Times, serif;
+        text-align: center;
+        vertical-align: middle;
+      }
+      .designsystems {
+        grid-column: span 2;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 25px;
+      }
+      .designsystems h2 {
+        font-size: 50px;
+      }
+      .guides {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        background-color: white;
+        margin-top: 40px;
+      }
+      .guides h2 {
+        font-size: 50px;
+      }
+      .guide {
+        height: 580px;
+        width: 480px;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 25px;
+      }
+      .email {
+        height: 810px;
+        width: 650px;
+        margin-top: 50px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 25px;
+      }
+      .email h2 {
+        font-size: 50px;
+      }
+      .allguides {
+        width: 100%;
+        height: 200px;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      .footer {
+        height: 600px;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      .footerlinks {
+        width: 1200px;
+        height: 200px;
+        position: relative;
+        top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: rgba(0, 0, 0, 0.9);
+        font-size: 30px;
+        font-family: 'Times New Roman', Times, serif;
+        color: white;
+        text-align: center;
+      }
+      .footertext {
+        width: 800px;
+        height: 200px;
+        position: relative;
+        margin-top: 150px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: rgba(0, 0, 0, 0.2);
+        font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
+        color: white;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div id="search">Search articles...</div>
+    </nav>
+    <div class="title">Don’t Miss These Latest Articles!</div>
+    <div class="panels">
+      <div class="panel">
+        <div class="panelcontent">How To Build A Blog With Next And MDX</div>
+      </div>
+      <div class="panel">
+        <div class="panelcontent">Designing With Reduced Motion For Motion Sensitivities</div>
+      </div>
+      <div class="panel">
+        <div class="panelcontent">Smashing Podcast Episode 24 With Cassie Evans: What Is SVG Animation?</div>
+      </div>
+      <div class="panel">
+        <div class="panelcontent">Smart Interface Design Patterns In Your Pocket: Checklist Cards PDF</div>
+      </div>
+    </div>
+    <div class="articles">
+      <div class="article">
+        <strong><h2>Very Interesting Title On Some Lovely Design Stuff</h2></strong><br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue. Quisque ut diam et est ullamcorper rhoncus eget id massa. Quisque tristique lorem nec quam finibus posuere. Praesent porttitor tristique neque ultricies semper. Aenean feugiat quam at vehicula tempus. Donec justo tortor, ullamcorper ut mauris at, venenatis lacinia orci. Donec non erat ut ipsum pharetra posuere. Proin ut sodales lectus. Quisque ullamcorper nibh quis finibus posuere.
+      </div>
+      <div class="article">
+        <strong><h2>Very Interesting Title On Some Lovely Design Stuff</h2></strong><br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue. Quisque ut diam et est ullamcorper rhoncus eget id massa. Quisque tristique lorem nec quam finibus posuere. Praesent porttitor tristique neque ultricies semper. Aenean feugiat quam at vehicula tempus. Donec justo tortor, ullamcorper ut mauris at, venenatis lacinia orci. Donec non erat ut ipsum pharetra posuere. Proin ut sodales lectus. Quisque ullamcorper nibh quis finibus posuere.
+      </div>
+      <div class="article">
+        <strong><h2>Very Interesting Title On Some Lovely Design Stuff</h2></strong><br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue. Quisque ut diam et est ullamcorper rhoncus eget id massa. Quisque tristique lorem nec quam finibus posuere. Praesent porttitor tristique neque ultricies semper. Aenean feugiat quam at vehicula tempus. Donec justo tortor, ullamcorper ut mauris at, venenatis lacinia orci. Donec non erat ut ipsum pharetra posuere. Proin ut sodales lectus. Quisque ullamcorper nibh quis finibus posuere.
+      </div>
+      <div class="article">
+        <strong><h2>Very Interesting Title On Some Lovely Design Stuff</h2></strong><br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue. Quisque ut diam et est ullamcorper rhoncus eget id massa. Quisque tristique lorem nec quam finibus posuere. Praesent porttitor tristique neque ultricies semper. Aenean feugiat quam at vehicula tempus. Donec justo tortor, ullamcorper ut mauris at, venenatis lacinia orci. Donec non erat ut ipsum pharetra posuere. Proin ut sodales lectus. Quisque ullamcorper nibh quis finibus posuere.
+      </div>
+      <div class="bigarticle">
+        <h2><br><br><br><br><br><br>1,699 smashing members</h2>
+      </div>
+      <div class="article">
+        <strong><h2>Very Interesting Title On Some Lovely Design Stuff</h2></strong><br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue. Quisque ut diam et est ullamcorper rhoncus eget id massa. Quisque tristique lorem nec quam finibus posuere. Praesent porttitor tristique neque ultricies semper. Aenean feugiat quam at vehicula tempus. Donec justo tortor, ullamcorper ut mauris at, venenatis lacinia orci. Donec non erat ut ipsum pharetra posuere. Proin ut sodales lectus. Quisque ullamcorper nibh quis finibus posuere.
+      </div>
+      <div class="article">
+        <strong><h2>Very Interesting Title On Some Lovely Design Stuff</h2></strong><br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue. Quisque ut diam et est ullamcorper rhoncus eget id massa. Quisque tristique lorem nec quam finibus posuere. Praesent porttitor tristique neque ultricies semper. Aenean feugiat quam at vehicula tempus. Donec justo tortor, ullamcorper ut mauris at, venenatis lacinia orci. Donec non erat ut ipsum pharetra posuere. Proin ut sodales lectus. Quisque ullamcorper nibh quis finibus posuere.
+      </div>
+      <div class="article">
+        <strong><h2>Very Interesting Title On Some Lovely Design Stuff</h2></strong><br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue. Quisque ut diam et est ullamcorper rhoncus eget id massa. Quisque tristique lorem nec quam finibus posuere. Praesent porttitor tristique neque ultricies semper. Aenean feugiat quam at vehicula tempus. Donec justo tortor, ullamcorper ut mauris at, venenatis lacinia orci. Donec non erat ut ipsum pharetra posuere. Proin ut sodales lectus. Quisque ullamcorper nibh quis finibus posuere.
+      </div>
+      <div class="article">
+        <strong><h2>Very Interesting Title On Some Lovely Design Stuff</h2></strong><br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue. Quisque ut diam et est ullamcorper rhoncus eget id massa. Quisque tristique lorem nec quam finibus posuere. Praesent porttitor tristique neque ultricies semper. Aenean feugiat quam at vehicula tempus. Donec justo tortor, ullamcorper ut mauris at, venenatis lacinia orci. Donec non erat ut ipsum pharetra posuere. Proin ut sodales lectus. Quisque ullamcorper nibh quis finibus posuere.
+      </div>
+      <div class="bigarticle">
+        <h2><br><br><br><br><br><br>New on Smashing TV</h2>
+      </div>
+    </div>
+    <div class="seearticles"><br><br><br><br><br><br>SEE ALL LATEST ARTICLES</div>
+    <div class="bookad">
+      <div class="adtitle">Meet “Click!”: Encourage Clicks
+        Without Shady Tricks</div>
+      <div class="adbutton"><br><br>Jump to table of contents →</div>
+      <div class="adpic"></div>
+    </div>
+    <div class="people">
+      <div class="mainperson">PERSON OF THE WEEK<br><br>Hui Jing Chen is a self-taught designer and developer who launched her web design career during downtime between training sessions when she was a full-time basketball player. Today, she is a UX Developer at Shopify and a member of the CSS Working Group. To bring together the CSS community in Singapore, Hui Jing co-founded the Talk.CSS meetup five years ago. She also shares her knowledge and her passion for CSS as a speaker and writer. You can find Hui Jing on Twitter as @hj_chen. Thank you for sharing and caring, dear Hui Jing!</div>
+      <div class="person">
+        <strong><h2>Very Interesting Title On Some Lovely Design Stuff</h2></strong><br>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue.</div>
+      <div class="person">
+        <strong><h2>Very Interesting Title On Some Lovely Design Stuff</h2></strong><br>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue.</div>
+      <div class="person">
+        <strong><h2>Very Interesting Title On Some Lovely Design Stuff</h2></strong><br>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue.</div>
+      <div class="person">
+        <strong><h2>Very Interesting Title On Some Lovely Design Stuff</h2></strong><br>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue.</div>
+      <div class="person">
+        <strong><h2>Very Interesting Title On Some Lovely Design Stuff</h2></strong><br>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue.</div>
+      <div class="person">
+        <strong><h2>Very Interesting Title On Some Lovely Design Stuff</h2></strong><br>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue.</div>
+      <div class="person">
+        <strong><h2>Very Interesting Title On Some Lovely Design Stuff</h2></strong><br>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue.</div>
+      <div class="person">
+        <strong><h2>Very Interesting Title On Some Lovely Design Stuff</h2></strong><br>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue.</div>
+      <div class="morepeople">
+        <br><br><br><br><br><br>MORE LINKS ON TWITTER
+      </div>
+      <div class="designsystems">
+        <strong><h2>Design Systems</h2></strong><br>
+        Meet Design Systems, a recent Smashing book in which Alla Kholmatova explores how to set up an effective design system to create great digital products. With common traps, gotchas and lessons learned.
+      </div>
+    </div>
+    <div class="guides">
+      <div class="guide">
+        <strong><h2>JavaScript & Frameworks</h2></strong><br>
+        React, Vue, or perhaps the lightweight Alpine.js? Whether you are an experienced JavaScript developer working with one of these frameworks, or just starting to learn, our authors have created some tutorials for you.
+      </div>
+      <div class="guide">
+        <strong><h2>CSS Layout</h2></strong><br>
+        CSS Layout has been transformed over the past years. We have you covered with all you need to master this new world. If you want to understand the technical details, or learn how to use new CSS creatively, these guides can help.</div>
+      <div class="guide">
+        <strong><h2>Web Performance</h2></strong><br>
+        Ensuring your site loads quickly is important. The subject touches almost every part of web design and development, from your choice of images to the performance of your web server. In this guide we bring together information that can help you build a fast site, and keep it fast.  
+      </div>
+    </div>
+    <div class="email">
+      <br><br><br><br><br><br><strong><h2>Email Newsletter</h2></strong><br>
+      Every second Tuesday, we send an email newsletter with useful techniques on front-end and UX. Subscribe and get Smart Interface Design Checklists PDF in your inbox. </div>
+    <div class="allguides"></div>
+    <div class="footer">
+      <div class="footerlinks">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue. Quisque ut diam et est ullamcorper rhoncus eget id massa. Quisque tristique lorem nec quam finibus posuere. Praesent porttitor tristique neque ultricies semper. Aenean feugiat quam at vehicula tempus. Donec justo tortor, ullamcorper ut mauris at, venenatis lacinia orci. Donec non erat ut ipsum pharetra posuere. Proin ut sodales lectus. Quisque ullamcorper nibh quis finibus posuere.
+      </div>
+      <div class="footertext">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor lorem, auctor sit amet diam eget, feugiat lobortis felis. Integer congue sed leo non congue. Quisque ut diam et est ullamcorper rhoncus eget id massa. Quisque tristique lorem nec quam finibus posuere. Praesent porttitor tristique neque ultricies semper. Aenean feugiat quam at vehicula tempus. Donec justo tortor, ullamcorper ut mauris at, venenatis lacinia orci. Donec non erat ut ipsum pharetra posuere. Proin ut sodales lectus. Quisque ullamcorper nibh quis finibus posuere.
+      </div>
+    </div>
+  </body>
+</html>
